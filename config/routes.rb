@@ -1,5 +1,5 @@
-Railsapp::Application.routes.draw do  
-  
+Railsapp::Application.routes.draw do   
+  root 'application#home'
   get '/signup' => 'users#new', :as => :signup
   post 'signup' => 'users#create'
   get '/profile' => 'users#show', :as => :profile
