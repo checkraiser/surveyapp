@@ -1,0 +1,22 @@
+ <div class="row">
+    <div class="col-md-5 col-md-offset-1">
+<%= form_tag('/surveys', method: 'POST') do %>
+	<%= hidden_field_tag 'survey[name]', @name %>
+	<h2>Create 5 questions</h2>
+	<% @survey.questions.each_with_index do |question, index| %>
+		<p>
+			<%= label_tag "survey[questions][##{index}]" , "#{index+1}" %>
+			<%= text_area_tag name="survey[questions_attributes][#{index}][content]", nil, class: 'form-control' %>
+		</p>
+	<% end %>
+	<h2>Create up to 5 recipients</h2>
+	<% @survey.questions.each_with_index do |question, index| %>
+		<p>
+			<%= label_tag "survey[surveyees][#{index}]", "Email" %>
+			<%= text_field_tag name="survey[surveyees_attributes][#{index}][email]", nil, class: 'form-control' %>
+		</p>
+	<% end %>
+	<%= submit_tag 'Add new survey', class: 'btn btn-primary' %>
+<% end %>
+</div>
+</div>

@@ -9,6 +9,9 @@ class ApplicationController < ActionController::Base
       redirect_to signin_path
     end
   end
+  def success
+    render 'surveys/success', :layout => 'success'
+  end
   def require_signin!
 	if current_user.nil?
 		flash[:error] =

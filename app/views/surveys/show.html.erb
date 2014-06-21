@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+<h1>Answers the 5 questions</h1>
+<%= form_tag("/take_survey/#{@surveyee.random_string}", :method => "POST") do %>
+	<% @survey.questions.each do |q| %>
+		<% if q.content.length > 0 %>
+			<%= simple_format(q.content) %>
+			<div class='control-group'>
+			Rating:
+			<% 5.times do |t| %>
+			
+				<%= radio_button_tag "questions[#{q.id}]", (t+1), class: 'form-control' %>
+				<%= t+1 %>			
+			<% end %>
+			</div>
+		<% end %>
+	<% end %>
+	<br />
+	<%= submit_tag "Submit survey", class: 'btn btn-primary' %>
+<% end %>
+</div>
+</div>

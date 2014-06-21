@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   end
 
   def show	
+  	@surveys = current_user.surveys
   end
   
   private

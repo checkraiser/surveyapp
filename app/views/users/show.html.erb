@@ -1,5 +1,38 @@
-<%= current_user.full_name %>
-<br />
-<%= current_user.email %>
-<br />
-<%= link_to 'Add new survey', new_survey_path %>
+<div class="row">
+    <div class="col-md-2 col-md-offset-5">
+		<h3><%= current_user.full_name %></h3>
+		<br /><br /><br />
+		<h3><%= current_user.email %></h3>
+		<br /><br /><br />
+		<%= link_to 'Add new survey', new_survey_path, :class => 'btn btn-large btn-primary' %>
+		<br />    	
+
+    </div>
+</div>
+
+<% if @surveys.count > 0 %>
+<h1>Survey results</h1>
+<% end %>
+
+	<% @surveys.each do |s| %>
+		<div class="row">
+			<div class="col-md-3">
+				<ul><h3><%= s.name %></h3>
+					<% s.questions.each do |q| %>
+						<li><%= q.content %></li>
+					<% end %>
+				</ul>
+			</div>
+			<div class="col-md-3">
+				<ul><h3><%= s.responses.count %> Responses</h3>
+				<% s.surveyees.each do |q| %>
+					<li>
+							<%= q.score || 0 %> / 25
+						</li>
+				<% end %>		
+				</ul>
+			</div>
+		</div>	
+	<% end %>
+
+	

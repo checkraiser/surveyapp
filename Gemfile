@@ -45,3 +45,4 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 # gem 'debugger', group: [:development, :test]
 
 gem 'cancan'
+gem 'bootstrap-sass', '~> 3.1.1'

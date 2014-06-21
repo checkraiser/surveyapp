@@ -1,5 +1,6 @@
 Railsapp::Application.routes.draw do   
   root 'application#home'
+  get '/success' => 'application#success', :as => :success
   get '/signup' => 'users#new', :as => :signup
   post 'signup' => 'users#create'
   get '/profile' => 'users#show', :as => :profile
@@ -9,6 +10,9 @@ Railsapp::Application.routes.draw do
   
   get '/surveys/new' => 'surveys#new', :as => :new_survey
   post '/surveys' => 'surveys#create', :as => :create_survey
+
+  get '/take_survey/:random_string' => 'surveys#show', :as => :take_survey
+  post '/take_survey/:random_string' => 'surveys#update'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
