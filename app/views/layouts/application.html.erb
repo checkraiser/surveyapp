@@ -7,8 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= link_to 'Home', root_path, class: 'btn btn-default' %>
 <% if current_user %>
-	<%= link_to 'Sign out' , signout_path, class: 'btn btn-primary' %>
+  <% if can? :manage, :all %>
+    <%= link_to 'Suggested Questions', suggested_questions_path, class: 'btn btn-default' %>
+  <% end %>
+	<%= link_to 'Sign out' , signout_path, class: 'btn btn-primary' %>  
 <% else %>
 	<%= link_to 'Sign in', signin_path, class: 'btn btn-primary' %>
 <% end %>

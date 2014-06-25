@@ -3,10 +3,18 @@
 <%= form_tag('/surveys', method: 'POST') do %>
 	<%= hidden_field_tag 'survey[name]', @name %>
 	<h2>Create 5 questions</h2>
+	
 	<% @survey.questions.each_with_index do |question, index| %>
 		<p>
-			<%= label_tag "survey[questions][##{index}]" , "#{index+1}" %>
+			<%= label_tag "survey[questions][##{index}]" , "#{index+1}" %>			
+			<select id="select2-<%= index %>">
+            	<% @suggested_questions.each do |q| %>
+					<option value="<%= q.id %>"><%= q.content %></option>
+            	<% end %>
+            </select>
 			<%= text_area_tag name="survey[questions_attributes][#{index}][content]", nil, class: 'form-control' %>
+			
+			<a href="#" class='suggested' id="<%= index %>">Suggested questions</a>
 		</p>
 	<% end %>
 	<h2>Create up to 5 recipients</h2>

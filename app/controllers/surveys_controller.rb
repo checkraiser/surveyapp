@@ -2,13 +2,16 @@ class SurveysController < ApplicationController
   before_action :require_signin!, :except => [:show, :update]
   before_action :set_surveyee, :except => [:new, :create]
   def new
-	@survey = current_user.surveys.build
-	@name = "Survey #{current_user.surveys.count.to_s}"
-	5.times { @survey.questions.build }
-	5.times { @survey.surveyees.build }
+    authorize! :create, Survey
+    @suggested_questions = SuggestedQuestion.all
+  	@survey = current_user.surveys.build
+  	@name = "Survey #{current_user.surveys.count.to_s}"
+  	5.times { @survey.questions.build }
+  	5.times { @survey.surveyees.build }
   end
 
   def create
+    authorize! :create, Survey
   	@survey = current_user.surveys.new(survey_params)
   	if @survey.save
   		redirect_to profile_path
@@ -22,6 +25,7 @@ class SurveysController < ApplicationController
   end
 
   def update
+    authorize! :create, Survey
     sum = 0
     surveyee_params.each do |k, v|
       sum += v.to_i

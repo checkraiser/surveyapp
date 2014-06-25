@@ -1,0 +1,9 @@
+<h3>Available suggested questions</h3>
+
+<ol>
+	<% @suggested_questions.each do |q| %>
+		<li><%= q.content %> | <%= link_to 'Delete', q, method: :delete %></li>
+	<% end %>
+</ol>
+
+<%= render 'form' %>

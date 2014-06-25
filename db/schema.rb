@@ -11,12 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140621162304) do
+ActiveRecord::Schema.define(version: 20140625144132) do
 
   create_table "questions", force: true do |t|
     t.text     "content"
     t.integer  "score"
     t.integer  "survey_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "suggested_questions", force: true do |t|
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -43,6 +49,7 @@ ActiveRecord::Schema.define(version: 20140621162304) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "full_name"
+    t.boolean  "admin"
   end
 
 end

@@ -1,0 +1,9 @@
+<%= form_for @suggested_question, method: "POST" do |f| %>
+<div class="form-group">
+<p>
+<%= f.text_area :content, :class => 'form-control' %>
+</p>
+</div>
+<%= f.submit "Add new suggested question", :class => 'btn btn-primary' %>
+<% end %>
+</div>
