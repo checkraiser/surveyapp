@@ -5,4 +5,6 @@ Installation guide:
 * bundle install
 * bundle exec rake db:migrate
 * Edit the email configuration information in config/application.rb (hostname, username, password)
+* Create admin by command: bundle exec rake db:create_admin
 * bundle exec rails s
+
