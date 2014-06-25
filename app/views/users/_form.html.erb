@@ -2,7 +2,7 @@
     <div class="col-md-3 col-md-offset-5">
 <h1>Sign up</h1>
 <%= form_tag(signup_path, :method=>'post') do %>
-	<% if @user.errors.any? %>
+	<% if @user and  @user.errors.any? %>
 		<div id="error_explanation">
 			<h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 			<ul>
