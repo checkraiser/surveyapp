@@ -4,12 +4,19 @@ class Survey < ActiveRecord::Base
 	belongs_to :user
 	accepts_nested_attributes_for :questions
 	accepts_nested_attributes_for :surveyees, :reject_if => :all_blank
-	after_create :notify_surveyees
+	
 	def score
 		surveyees.sum(:score)
 	end
 	def responses
 		surveyees.where('score > 0')
+	end
+	def draft!
+		self.update(state: "draft")
+	end
+	def send
+		self.update(state: "sent")
+		notify_surveyees
 	end
 	private
 	def notify_surveyees
