@@ -1,0 +1,25 @@
+<h3>Edit Profile:</h3>
+
+<%= form_tag(update_profile_path, :multipart => true, :method=>'post') do %>
+<p>
+	<label>Change Photo</label>
+	<%= image_tag(current_user.avatar_url, width: "160") if current_user.avatar? %>
+	<%= file_field_tag :avatar %>
+	<%= hidden_field_tag :avatar_cache %>
+</p>
+<p>
+	<label>Name:</label>
+	<%= text_field_tag :full_name, "#{current_user.full_name}" %>
+</p>
+<p>
+	<label>Email:</label>
+	<%= text_field_tag :email, "#{current_user.email}" %>
+</p>
+<p>
+	<label>Bio:</label>
+	<%= text_area_tag :bio, "#{current_user.bio}" %>
+</p>
+<p>
+	<%= submit_tag 'Save changes' %>
+</p>
+<% end %>

@@ -46,3 +46,4 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 
 gem 'cancan'
 gem 'bootstrap-sass', '~> 3.1.1'
+gem 'carrierwave'

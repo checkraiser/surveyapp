@@ -12,6 +12,9 @@
   <% if can? :manage, :all %>
     <%= link_to 'Suggested Questions', suggested_questions_path, class: 'btn btn-default' %>
   <% end %>
+  <% if can? :update, current_user %>
+	<%= link_to 'Edit Profile', edit_profile_path, class: 'btn btn-default' %>
+  <% end %>
 	<%= link_to 'Sign out' , signout_path, class: 'btn btn-primary' %>  
 <% else %>
 	<%= link_to 'Sign in', signin_path, class: 'btn btn-primary' %>

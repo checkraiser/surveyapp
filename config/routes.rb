@@ -4,6 +4,8 @@ Railsapp::Application.routes.draw do
   get '/signup' => 'users#new', :as => :signup
   post 'signup' => 'users#create'
   get '/profile' => 'users#show', :as => :profile
+  get '/profile/edit' => 'users#edit', :as => :edit_profile
+  post '/profile' => 'users#update', :as => :update_profile
   get '/signin' => 'sessions#new', :as => :signin
   post '/signin' => 'sessions#create'
   get '/signout' => 'sessions#destroy', :as => :signout
