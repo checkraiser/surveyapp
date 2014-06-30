@@ -27,10 +27,10 @@ class SurveysController < ApplicationController
   def update
     authorize! :create, Survey
     sum = 0
-    surveyee_params.each do |k, v|
+    surveyee_params[:questions].each do |k, v|
       sum += v.to_i
-    end
-    @surveyee.update(score: sum)
+    end	
+    @surveyee.update(comment: surveyee[:comment], score: sum)
     redirect_to success_path
   end
 
@@ -40,7 +40,7 @@ class SurveysController < ApplicationController
     @survey = @surveyee.survey
   end
   def surveyee_params
-    params.require(:questions)
+    params.require(:surveyee).permit(:questions, :comment)
   end
   def survey_params
   	params.require(:survey).permit(:name, questions_attributes: [:content], surveyees_attributes: [:email])
