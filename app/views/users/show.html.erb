@@ -15,11 +15,14 @@
 <% if @surveys.count > 0 %>
 <h1>Survey results</h1>
 <% end %>
-
+	
 	<% @surveys.each do |s| %>
+		
 		<div class="row">
 			<div class="col-md-3">
-				<ul><h3><%= s.name %></h3>
+				<ul><h3><%= s.name %><% if s.state == 'draft' %>
+			<strong>Draft</strong>
+		<% end %></h3>
 					<% s.questions.each do |q| %>
 						<li><%= q.content %></li>
 					<% end %>
