@@ -1,6 +1,6 @@
  <div class="row">
     <div class="col-md-5 col-md-offset-1">
-<%= form_tag('/surveys', method: 'POST') do %>
+<%= form_tag(update_survey_path(@survey), method: 'POST') do %>
 	<%= hidden_field_tag 'survey[name]', @name %>
 	<h2>Create 5 questions</h2>
 	
@@ -12,16 +12,16 @@
 					<option value="<%= q.id %>"><%= q.content %></option>
             	<% end %>
             </select>
-			<%= text_area_tag name="survey[questions_attributes][][content]", nil, class: 'form-control' %>
+			<%= text_area_tag name="survey[questions_attributes][][content]", question.content, class: 'form-control' %>
 			
 			<a href="#" class='suggested' id="<%= index %>">Suggested questions</a>
 		</p>
 	<% end %>
 	<h2>Create up to 5 recipients</h2>
-	<% @survey.questions.each_with_index do |question, index| %>
+	<% @survey.surveyees.each_with_index do |surveyee, index| %>
 		<p>
 			<%= label_tag "survey[surveyees][#{index}]", "Email" %>
-			<%= text_field_tag name="survey[surveyees_attributes][][email]", nil, class: 'form-control' %>
+			<%= text_field_tag name="survey[surveyees_attributes][][email]", surveyee.email, class: 'form-control' %>
 		</p>
 	<% end %>
 	<%= submit_tag 'Save draft', class: 'btn btn-primary' %>

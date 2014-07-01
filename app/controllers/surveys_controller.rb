@@ -1,6 +1,6 @@
 class SurveysController < ApplicationController
   before_action :require_signin!, :except => [:show, :update]
-  before_action :set_surveyee, :except => [:new, :create]
+  before_action :set_surveyee, :only => [:show, :update]
   def new
     authorize! :create, Survey
     @suggested_questions = SuggestedQuestion.all
@@ -10,10 +10,42 @@ class SurveysController < ApplicationController
   	5.times { @survey.surveyees.build }
   end
 
+  
+  def continue
+	@survey = Survey.find(params[:id])
+	authorize! :continue, @survey
+	@suggested_questions = SuggestedQuestion.all
+	(5 - @survey.surveyees.count).times { @survey.surveyees.build }
+	(5 - @survey.questions.count).times { @survey.questions.build }
+  end
+  def update_survey
+	@survey = Survey.find(params[:id])
+	authorize! :continue, @survey
+	@survey.questions.destroy_all
+	@survey.surveyees.destroy_all
+	
+  	if @survey.update(survey_params)
+		if params[:commit] == 'Save draft'
+			@survey.draft!				
+		else
+			@survey.deliver
+		end
+		flash[:notice] = "Update successfully."
+  		redirect_to profile_path
+  	else
+		flash[:error] = "Can't update survey"
+  		redirect_to continue_survey_path(@survey)
+  	end
+  end
   def create
     authorize! :create, Survey
   	@survey = current_user.surveys.new(survey_params)
   	if @survey.save
+		if params[:commit] == 'Save draft'
+			@survey.draft!				
+		else
+			@survey.deliver
+		end
   		redirect_to profile_path
   	else
   		redirect_to new_survey_path

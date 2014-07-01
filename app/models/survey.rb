@@ -14,7 +14,7 @@ class Survey < ActiveRecord::Base
 	def draft!
 		self.update(state: "draft")
 	end
-	def send
+	def deliver
 		self.update(state: "sent")
 		notify_surveyees
 	end

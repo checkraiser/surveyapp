@@ -35,6 +35,13 @@
 				</ul>
 			</div>
 		</div>	
+		<% if s.state == 'draft' %>
+		<div class="row">
+			<div class="col-md-3">
+				<%= link_to 'Continue survey', continue_survey_path(s), class: 'btn btn-primary' %>
+			</div>
+		</div>
+		<% end %>
 	<% end %>
 
 	

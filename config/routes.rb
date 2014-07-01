@@ -12,7 +12,8 @@ Railsapp::Application.routes.draw do
   
   get '/surveys/new' => 'surveys#new', :as => :new_survey
   post '/surveys' => 'surveys#create', :as => :create_survey
-
+  get '/surveys/:id' => 'surveys#continue', :as => :continue_survey
+  post '/surveys/:id' => 'surveys#update_survey', :as => :update_survey
   get '/take_survey/:random_string' => 'surveys#show', :as => :take_survey
   post '/take_survey/:random_string' => 'surveys#update'
   resources :suggested_questions
