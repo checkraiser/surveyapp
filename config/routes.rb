@@ -16,6 +16,9 @@ Railsapp::Application.routes.draw do
   post '/surveys/:id' => 'surveys#update_survey', :as => :update_survey
   get '/take_survey/:random_string' => 'surveys#show', :as => :take_survey
   post '/take_survey/:random_string' => 'surveys#update'
+  
+  get '/dashboard' => 'admin#dashboard', :as => :dashboard
+  get '/users' => 'admin#users', :as => :users
   resources :suggested_questions
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

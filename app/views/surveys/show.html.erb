@@ -1,5 +1,8 @@
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
+	<%= image_tag(@survey.user.avatar_url, width: "160") if @survey.user.avatar? %>
+	<%= @survey.user.bio %>	<br />
+	<%= @survey.user.full_name %>
 <h1>Please answer my 5 questions</h1>
 <%= form_tag("/take_survey/#{@surveyee.random_string}", :method => "POST") do %>
 	<% @survey.questions.each do |q| %>
@@ -9,7 +12,7 @@
 			Rating:
 			<% 5.times do |t| %>
 			
-				<%= radio_button_tag "surveyee[questions][#{q.id}]", (t+1), class: 'form-control' %>
+				<%= radio_button_tag "questions[#{q.id}]", (t+1), class: 'form-control' %>
 				<%= t+1 %>			
 			<% end %>
 			</div>
@@ -17,7 +20,7 @@
 	<% end %>
 	<br />
 	<h1>Please provide additional comments:</h1>
-	<%= text_area_tag "surveyee[questions][comment]" %>
+	<%= text_area_tag "comment", nil, :size => '90x10' %>
 	<br />
 	<%= submit_tag "Submit survey", class: 'btn btn-primary' %>
 <% end %>

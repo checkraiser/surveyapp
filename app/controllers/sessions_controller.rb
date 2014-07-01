@@ -1,10 +1,12 @@
 class SessionsController < ApplicationController
   def new
+	redirect_to profile_path if current_user
   	@user = User.new
   	render :new, :layout => 'success'
   end
 
   def create
+	redirect_to profile_path if current_user
 	user = User.where(:email => params[:signin][:email]).first
 	if user && user.authenticate(params[:signin][:password])
 		session[:user_id] = user.id
@@ -16,7 +18,7 @@ class SessionsController < ApplicationController
 	end
   end
 
-  def destroy
+  def destroy	
 	session[:user_id] = nil
 	redirect_to '/'
   end

@@ -13,6 +13,7 @@ class SurveysController < ApplicationController
   
   def continue
 	@survey = Survey.find(params[:id])
+	@name = "Survey #{current_user.surveys.count.to_s}"
 	authorize! :continue, @survey
 	@suggested_questions = SuggestedQuestion.all
 	(5 - @survey.surveyees.count).times { @survey.surveyees.build }
@@ -56,13 +57,12 @@ class SurveysController < ApplicationController
     
   end
 
-  def update
-    authorize! :create, Survey
+  def update    
     sum = 0
-    surveyee_params[:questions].each do |k, v|
+    surveyee_params.each do |k, v|
       sum += v.to_i
     end	
-    @surveyee.update(comment: surveyee[:comment], score: sum)
+    @surveyee.update(comment: params[:comment], score: sum)
     redirect_to success_path
   end
 
@@ -72,7 +72,7 @@ class SurveysController < ApplicationController
     @survey = @surveyee.survey
   end
   def surveyee_params
-    params.require(:surveyee).permit(:questions, :comment)
+    params.require(:questions)
   end
   def survey_params
   	params.require(:survey).permit(:name, questions_attributes: [:content], surveyees_attributes: [:email])

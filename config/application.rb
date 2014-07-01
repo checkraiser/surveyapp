@@ -24,8 +24,8 @@ module Railsapp
         address:              'smtp.gmail.com',
         port:                 587,
         domain:               'localhost:3000',
-        user_name:            'example@gmail.com',
-        password:             'password',
+        user_name:            'checkraiser11@gmail.com',
+        password:             'LOfCB5Vz',
         authentication:       'plain',
         enable_starttls_auto: true  }
     config.action_mailer.default_url_options = { host: "localhost:3000" }

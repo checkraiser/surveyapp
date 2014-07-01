@@ -18,6 +18,8 @@ class Survey < ActiveRecord::Base
 		self.update(state: "sent")
 		notify_surveyees
 	end
+	
+	
 	private
 	def notify_surveyees
 		surveyees.each do |s|

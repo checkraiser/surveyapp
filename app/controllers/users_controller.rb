@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_signin!, :only => :show
   def new
+    redirect_to profile_path if current_user
 	@user = User.new
   end
   def edit

@@ -11,6 +11,8 @@
 <% if current_user %>
   <% if can? :manage, :all %>
     <%= link_to 'Suggested Questions', suggested_questions_path, class: 'btn btn-default' %>
+	<%= link_to 'Dashboard', dashboard_path, class: 'btn btn-default' %>
+	<%= link_to 'Users', users_path, class: 'btn btn-default' %>
   <% end %>
   <% if can? :update, current_user %>
 	<%= link_to 'Edit Profile', edit_profile_path, class: 'btn btn-default' %>

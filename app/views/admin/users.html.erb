@@ -1,0 +1,20 @@
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Name</td>
+			<td>Email</td>
+			<td>How many surveys</td>
+			<td>Avg.Rating</td>
+		</tr>
+	</thead>
+	<tbody>
+		<% @users.each do |u| %>
+		<tr>
+			<td><%= u.full_name %></td>
+			<td><%= u.email %></td>
+			<td><%= u.surveys.count %></td>
+			<td><%= u.avg.to_s %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
